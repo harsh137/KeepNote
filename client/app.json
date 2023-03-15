@@ -1,4 +1,10 @@
 {
-  "name": "client",
-  "displayName": "client"
+  "name": "test",
+  "displayName": "test",
+  "icon":"./assets/splashImage.png",
+  "splash":{
+    "image":"./assets/splashImage.png",
+    "resizeMode":"contain",
+    "backgroungColor":"#ffffff"
+  }
 }
