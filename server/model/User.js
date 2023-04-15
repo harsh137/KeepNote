@@ -20,6 +20,32 @@ const userSchema= new mongoos.Schema({
     
     
 })
+
+const noteSchema= new mongoos.Schema({
+    id_Notes:{
+        type:String,
+        require:true
+    },
+    Heading:{
+            type:String,
+            require:true
+            
+        },
+    Content:{
+        type:String,
+        require:true
+    },
+    user_id:{
+        type:String,
+        require:true
+    }
+
+
+
+    
+    
+})
+
 userSchema.pre('save',async function(next){
     const user=this;
     console.log("Just Befor Saving the user Before hashing",user.password);
@@ -36,3 +62,4 @@ userSchema.pre('save',async function(next){
 
 
 mongoos.model("User",userSchema)
+mongoos.model("Notes",noteSchema)

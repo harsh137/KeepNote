@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 
 function Signup({navigation}) {
-    // const [name, setName] = useState("");
-    // const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false)
     const [signupData,setSignupData]=useState({
         name:'',
@@ -40,7 +38,7 @@ function Signup({navigation}) {
             }
             else{
                 try{
-                    await fetch('http://192.168.29.195:3000/signup',{
+                    await fetch('http://192.168.114.181:3000/signup',{
                         method:'POST',
                         headers:{
                             'Content-Type': 'application/json'

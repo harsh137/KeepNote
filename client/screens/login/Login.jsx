@@ -11,7 +11,9 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 function Login({navigation}) {
+    const url="192.168.141.181:3000"
     // const  [userName,setUserName]=useState("");
     // const  [userPassword,setUserPassword]=useState("");
     const [loginData, setLoginData] = useState({email: '', password: ''})
@@ -19,29 +21,29 @@ function Login({navigation}) {
     const [isLoading, setIsLoading] = useState(false);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function fetchData() { // console.log("hahahahahah")
-            await AsyncStorage.getItem("user") != null ? navigation.navigate("Home") : navigation.navigate("Login");
-            // await AsyncStorage.getItem("user")!=null?console.log(JSON.parse( await AsyncStorage.getItem("user"))):console.log(JSON.parse( await AsyncStorage.getItem("user")));
+    //     async function fetchData() { // console.log("hahahahahah")
+    //         await AsyncStorage.getItem("user") != null ? navigation.navigate("Home") : navigation.navigate("Login");
+   
+    //     }fetchData()
 
-        }fetchData()
-
-    }, []);
+    // }, []);
 
 
     const sendtoBackend = async () => {
+
         setIsLoading(true);
         // console.log(loginData)
         if (loginData.email == "" || loginData.password == '') {
-            setIsLoading(false);
             setError("All Fild Are Required");
+            setIsLoading(false);
             alert(error);
 
             return;
         } else {
             try {
-                await fetch('http://192.168.29.195:3000/signin', {
+                await fetch(`http://${url}/signin`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -56,8 +58,9 @@ function Login({navigation}) {
                         alert(error)
                     } else {
                         console.log(data, 'if Logged in')
-                        AsyncStorage.setItem('user', JSON.stringify(data.token))
-                        // console.log(JSON.parse( await AsyncStorage.getItem("user")))
+                        
+                        AsyncStorage.setItem('user', JSON.stringify(data.id))
+                        
                         setLoginData({
                           email:'',
                           password:''
@@ -84,7 +87,9 @@ function Login({navigation}) {
             <ActivityIndicator size="large"/>
 
         </View>
-    </> : <SafeAreaView className="flex-1 items-center justify-center m-4">
+    </> : 
+    
+    <SafeAreaView className="flex-1 items-center justify-center m-4">
         <TextInput value={
                 loginData.email
             }
@@ -132,6 +137,7 @@ function Login({navigation}) {
         }>
             <Text className='text-black'>Dont't Have Account</Text>
         </TouchableOpacity>
+        
 
 
     </SafeAreaView>);
